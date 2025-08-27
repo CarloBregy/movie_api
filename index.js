@@ -2,23 +2,17 @@ const express = require('express');
 const app = express();
 
 let topMovies = [
-  {
-    title: 'Harry Potter and the Sorcerer\'s Stone',
-    author: 'J.K. Rowling'
-  },
-  {
-    title: 'Lord of the Rings',
-    author: 'J.R.R. Tolkien'
-  },
-  {
-    title: 'Twilight',
-    author: 'Stephanie Meyer'
-  }
+  { title: 'Harry Potter and the Sorcerer\'s Stone', author: 'J.K. Rowling' },
+  { title: 'Lord of the Rings', author: 'J.R.R. Tolkien' },
+  { title: 'Twilight', author: 'Stephanie Meyer' },
+  { title: 'Inception', author: 'Christopher Nolan' },
+  { title: 'The Matrix', author: 'The Wachowskis' },
+  { title: 'Interstellar', author: 'Christopher Nolan' },
+  { title: 'Gladiator', author: 'Ridley Scott' },
+  { title: 'The Dark Knight', author: 'Christopher Nolan' },
+  { title: 'Avatar', author: 'James Cameron' },
+  { title: 'Titanic', author: 'James Cameron' }
 ];
-
-app.get('/', (req, res) => {
-  res.send('My top Movies');
-});
 
 app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: __dirname });
@@ -27,6 +21,11 @@ app.get('/documentation', (req, res) => {
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
+
+app.get('/', (req, res) => {
+  res.send('Welcome to my Movie API!');
+});
+
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');

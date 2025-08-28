@@ -5,9 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie API Documentation</title>
 </head>
+
+<style>
+  
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+
+  </style>
+
 <body>
   <h1>Movie API Documentation</h1>
   <p>Welcome to the Movie API! This API allows developers to access information about movies, including details such as title, genre, release year, and ratings. You can use this API to fetch movie data and integrate it into your applications.</p>
   <p>As we continue building this API, more endpoints and features will be added. Check back here for updates and usage instructions.</p>
+  
+  <p>This API provides endpoints to manage movies and users.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>Response</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GET</td>
+        <td>/movies</td>
+        <td>Returns a list of all movies</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/movies/:title</td>
+        <td>Returns data about a single movie (description, genre, director, image URL, featured flag)</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/genres/:name</td>
+        <td>Returns data about a genre (description)</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/directors/:name</td>
+        <td>Returns data about a director (bio, birth year, death year)</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/users</td>
+        <td>Allows new users to register</td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>/users/:username</td>
+        <td>Allows users to update their user info (username)</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>Adds a movie to the user’s list of favorites (returns confirmation text)</td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>Removes a movie from the user’s list of favorites (returns confirmation text)</td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>/users/:username</td>
+        <td>Allows an existing user to deregister (returns confirmation text)</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
 </body>
 </html>

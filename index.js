@@ -25,7 +25,7 @@ let movies = [
     title: "Lord of the Rings: The Fellowship of the Ring",
     author: "J.R.R. Tolkien",
     description: "A meek Hobbit and eight companions set out on a journey to destroy the One Ring and save Middle-earth from the Dark Lord Sauron.",
-    genre: { name: "Fantasy" },
+    genre: { name: "Adventure" },
     director: "Peter Jackson",
     image: "https://m.media-amazon.com/images/I/91z0u1wM0LL._AC_SY679_.jpg",
     directorBio: {
@@ -67,7 +67,7 @@ let movies = [
     title: "The Matrix",
     author: "The Wachowskis",
     description: "A computer hacker learns from rebels about the true nature of his reality and his role in the war against its controllers.",
-    genre: { name: "Sci-Fi" },
+    genre: { name: "Cyberpunk" },
     director: "Lana and Lilly Wachowski",
     image: "https://m.media-amazon.com/images/I/71pX+5X7QKL._AC_SY679_.jpg",
     directorBio: {
@@ -81,7 +81,7 @@ let movies = [
     title: "Interstellar",
     author: "Christopher Nolan",
     description: "A brilliant NASA physicist works on plans to save mankind by transporting Earth's population to a new home via a wormhole.",
-    genre: { name: "Sci-Fi" },
+    genre: { name: "Drama" },
     director: "Christopher Nolan",
     image: "https://m.media-amazon.com/images/I/91u2Y8XrJwL._AC_SY679_.jpg",
     directorBio: {
@@ -95,7 +95,7 @@ let movies = [
     title: "Gladiator",
     author: "Ridley Scott",
     description: "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
-    genre: { name: "Action" },
+    genre: { name: "Historical" },
     director: "Ridley Scott",
     image: "https://m.media-amazon.com/images/I/91VZ5Z5XyDL._AC_SY679_.jpg",
     directorBio: {
@@ -109,7 +109,7 @@ let movies = [
     title: "The Dark Knight",
     author: "Christopher Nolan",
     description: "When the Joker wreaks havoc on Gotham, Batman, Gordon, and Dent must work together to stop him.",
-    genre: { name: "Action" },
+    genre: { name: "Superhero" },
     director: "Christopher Nolan",
     image: "https://m.media-amazon.com/images/I/91KkRz0Z9wL._AC_SY679_.jpg",
     directorBio: {
@@ -123,7 +123,7 @@ let movies = [
     title: "Avatar",
     author: "James Cameron",
     description: "A paraplegic Marine sent to Pandora becomes torn between following orders and protecting the world he feels is his home.",
-    genre: { name: "Action" },
+    genre: { name: "Fantasy-SciFi" },
     director: "James Cameron",
     image: "https://m.media-amazon.com/images/I/91u3+uJ0JwL._AC_SY679_.jpg",
     directorBio: {
@@ -137,7 +137,7 @@ let movies = [
     title: "Titanic",
     author: "James Cameron",
     description: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the ill-fated R.M.S. Titanic.",
-    genre: { name: "Drama" },
+    genre: { name: "Romantic Drama" },
     director: "James Cameron",
     image: "https://m.media-amazon.com/images/I/91z5z5XyqOL._AC_SY679_.jpg",
     directorBio: {
@@ -148,7 +148,6 @@ let movies = [
     }
   }
 ];
-
 
 
 app.use(express.static(path.join(__dirname, 'public')));

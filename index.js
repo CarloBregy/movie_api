@@ -11,7 +11,7 @@ let movies = [
     title: "Harry Potter and the Sorcerer's Stone",
     author: "J.K. Rowling",
     description: "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family, and the terrible evil that haunts the magical world.",
-    "genre": { "name": "Fantasy" },
+    genre: { name: "Fantasy" },
     director: "Chris Columbus",
     image: "https://m.media-amazon.com/images/I/51Uq4d5L5gL._AC_SY679_.jpg",
     directorBio: {
@@ -170,14 +170,14 @@ app.get('/movies/:title', (req, res) => {
   }
 });
 
-app.get('/movies/genre/:genrename', (req, res) => {
-  const { genrename } = req.params;
-  const genre = movies.find(
-    movie => movie.genre.name.toLowerCase() === decodeURIComponent(genrename).toLowerCase().genre
+app.get('/movies/genre/:genre', (req, res) => {
+  const { genre } = req.params;
+  const movies = movies.find(
+    movie => movie.genre.name.toLowerCase() === decodeURIComponent(genre).toLowerCase()
   );
 
-  if (movie) {
-    res.status(200).json(movie);
+  if (movies) {
+    res.status(200).json(movies);
   } else {
     res.status(404).send('Genre not found');
   }

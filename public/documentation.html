@@ -26,61 +26,87 @@
   
   <p>This API provides endpoints to manage movies and users.</p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Request</th>
-        <th>URL</th>
-        <th>Response</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GET</td>
-        <td>/movies</td>
-        <td>Returns a list of all movies</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/movies/:title</td>
-        <td>Returns data about a single movie (description, genre, director, image URL, featured flag)</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/genres/:name</td>
-        <td>Returns data about a genre (description)</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/directors/:name</td>
-        <td>Returns data about a director (bio, birth year, death year)</td>
-      </tr>
-      <tr>
-        <td>POST</td>
-        <td>/users</td>
-        <td>Allows new users to register</td>
-      </tr>
-      <tr>
-        <td>PUT</td>
-        <td>/users/:username</td>
-        <td>Allows users to update their user info (username)</td>
-      </tr>
-      <tr>
-        <td>POST</td>
-        <td>/users/:username/movies/:movieID</td>
-        <td>Adds a movie to the user’s list of favorites (returns confirmation text)</td>
-      </tr>
-      <tr>
-        <td>DELETE</td>
-        <td>/users/:username/movies/:movieID</td>
-        <td>Removes a movie from the user’s list of favorites (returns confirmation text)</td>
-      </tr>
-      <tr>
-        <td>DELETE</td>
-        <td>/users/:username</td>
-        <td>Allows an existing user to deregister (returns confirmation text)</td>
-      </tr>
-    </tbody>
-  </table>
+<table>
+  <thead>
+    <tr>
+      <th>Request</th>
+      <th>URL</th>
+      <th>Query Parameters</th>
+      <th>Request Body</th>
+      <th>Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>/movies</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Array of all movie objects, e.g. [{ "title": "Inception", "genre": {...}, "director": {...} }, ...]</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/movies/:title</td>
+      <td>title - the movie title</td>
+      <td>None</td>
+      <td>Movie object with description, genre, director, image URL, featured flag</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/genres/:name</td>
+      <td>name - genre name</td>
+      <td>None</td>
+      <td>Genre object, e.g. { "name": "Sci-Fi", "description": "Science fiction movies" }</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/directors/:name</td>
+      <td>name - director's name</td>
+      <td>None</td>
+      <td>Director object, e.g. { "name": "Christopher Nolan", "bio": "...", "birthYear": 1970, "deathYear": null }</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users</td>
+      <td>None</td>
+      <td>{
+  "name": "John Doe",
+  "favoriteMovies": []
+}</td>
+      <td>Created user object with unique ID, e.g. { "id": "uuid", "name": "John Doe", "favoriteMovies": [] }</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/users/:username</td>
+      <td>username - existing user's username</td>
+      <td>{
+  "name": "New Name"
+}</td>
+      <td>Updated user object with new name</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/:username/movies/:movieID</td>
+      <td>username - user identifier, movieID - movie title or ID</td>
+      <td>None (data comes from URL)</td>
+      <td>Confirmation text, e.g. "Inception has been added to user JohnDoe's array."</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/:username/movies/:movieID</td>
+      <td>username - user identifier, movieID - movie title or ID</td>
+      <td>None</td>
+      <td>Confirmation text, e.g. "Inception has been removed from user JohnDoe's array."</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/:username</td>
+      <td>username - user identifier</td>
+      <td>None</td>
+      <td>Confirmation text, e.g. "User JohnDoe has been removed."</td>
+    </tr>
+  </tbody>
+</table>
+
 </body>
 </html>

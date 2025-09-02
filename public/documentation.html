@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie API Documentation</title>
-</head>
-
-<style>
-  
+  <style>
     th, td {
       border: 1px solid #ddd;
       padding: 0.75rem;
@@ -16,97 +13,85 @@
     th {
       background-color: #f2f2f2;
     }
-
   </style>
-
+</head>
 <body>
   <h1>Movie API Documentation</h1>
-  <p>Welcome to the Movie API! This API allows developers to access information about movies, including details such as title, genre, release year, and ratings. You can use this API to fetch movie data and integrate it into your applications.</p>
-  <p>As we continue building this API, more endpoints and features will be added. Check back here for updates and usage instructions.</p>
+  <p>Welcome to the Movie API! This API allows developers to access and manage movies and users, including details such as title, genre, director, and user favorite lists.</p>
   
-  <p>This API provides endpoints to manage movies and users.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>Query Parameters</th>
+        <th>Request Body</th>
+        <th>Response</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- READ Queries -->
+      <tr>
+        <td>GET</td>
+        <td>/movies</td>
+        <td>None</td>
+        <td>None</td>
+        <td>Array of all movie objects, e.g. [{ "Title": "Inception", "Genre": {...}, "Director": {...} }, ...]</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/movies/:title</td>
+        <td>title - movie title</td>
+        <td>None</td>
+        <td>Movie object that matches the title, including description, genre, director, image path, and featured flag</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/movies/genre/:name</td>
+        <td>name - genre name</td>
+        <td>None</td>
+        <td>Array of movies with the specified genre, e.g. [{ "Title": "Se7en", "Genre": {...}, "Director": {...} }, ...]</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/movies/genre/:genreName/director/:directorName</td>
+        <td>genreName - genre, directorName - director name</td>
+        <td>None</td>
+        <td>Array of movies that match both the genre and director</td>
+      </tr>
 
-<table>
-  <thead>
-    <tr>
-      <th>Request</th>
-      <th>URL</th>
-      <th>Query Parameters</th>
-      <th>Request Body</th>
-      <th>Response</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>GET</td>
-      <td>/movies</td>
-      <td>None</td>
-      <td>None</td>
-      <td>Array of all movie objects, e.g. [{ "title": "Inception", "genre": {...}, "director": {...} }, ...]</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/movies/:title</td>
-      <td>title - the movie title</td>
-      <td>None</td>
-      <td>Movie object with description, genre, director, image URL, featured flag</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/genres/:name</td>
-      <td>name - genre name</td>
-      <td>None</td>
-      <td>Genre object, e.g. { "name": "Sci-Fi", "description": "Science fiction movies" }</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/directors/:name</td>
-      <td>name - director's name</td>
-      <td>None</td>
-      <td>Director object, e.g. { "name": "Christopher Nolan", "bio": "...", "birthYear": 1970, "deathYear": null }</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/users</td>
-      <td>None</td>
-      <td>{
-  "name": "John Doe",
-  "favoriteMovies": []
-}</td>
-      <td>Created user object with unique ID, e.g. { "id": "uuid", "name": "John Doe", "favoriteMovies": [] }</td>
-    </tr>
-    <tr>
-      <td>PUT</td>
-      <td>/users/:username</td>
-      <td>username - existing user's username</td>
-      <td>{
-  "name": "New Name"
-}</td>
-      <td>Updated user object with new name</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/users/:username/movies/:movieID</td>
-      <td>username - user identifier, movieID - movie title or ID</td>
-      <td>None (data comes from URL)</td>
-      <td>Confirmation text, e.g. "Inception has been added to user JohnDoe's array."</td>
-    </tr>
-    <tr>
-      <td>DELETE</td>
-      <td>/users/:username/movies/:movieID</td>
-      <td>username - user identifier, movieID - movie title or ID</td>
-      <td>None</td>
-      <td>Confirmation text, e.g. "Inception has been removed from user JohnDoe's array."</td>
-    </tr>
-    <tr>
-      <td>DELETE</td>
-      <td>/users/:username</td>
-      <td>username - user identifier</td>
-      <td>None</td>
-      <td>Confirmation text, e.g. "User JohnDoe has been removed."</td>
-    </tr>
-  </tbody>
-</table>
+      <!-- UPDATE Queries -->
+      <tr>
+        <td>PUT</td>
+        <td>/movies/:title</td>
+        <td>title - movie title</td>
+        <td>{ "Description": "New description text" }</td>
+        <td>Updates the description of the specified movie</td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>/movies/director/:name</td>
+        <td>name - director name</td>
+        <td>{ "Bio": "Updated bio text" }</td>
+        <td>Updates the bio for all movies directed by this director</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>username - user identifier, movieID - movie title or ObjectId</td>
+        <td>None</td>
+        <td>Adds the specified movie to the user's FavoriteMovies array</td>
+      </tr>
 
+      <!-- DELETE Query -->
+      <tr>
+        <td>DELETE</td>
+        <td>/users/:username</td>
+        <td>username - user identifier</td>
+        <td>None</td>
+        <td>Deletes the specified user and returns a confirmation message</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

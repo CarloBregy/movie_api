@@ -13,16 +13,25 @@
     th {
       background-color: #f2f2f2;
     }
+    pre {
+  background: #f7f7f7;
+  padding: 0.5rem;
+  border-radius: 4px;
+  overflow-x: auto; 
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  max-height: 200px; 
+}
   </style>
 </head>
 <body>
   <h1>Movie API Documentation</h1>
-  <p>Welcome to the Movie API! This API allows developers to access and manage movies and users, including details such as title, genre, director, and user favorite lists.</p>
+  <p>Welcome to the Movie API! This API allows developers to manage movies and users, including retrieving movie info, user info, and managing users’ favorite movies.</p>
   
   <table>
     <thead>
       <tr>
-        <th>Request</th>
+        <th>Method</th>
         <th>URL</th>
         <th>Query Parameters</th>
         <th>Request Body</th>
@@ -30,67 +39,157 @@
       </tr>
     </thead>
     <tbody>
-      <!-- READ Queries -->
+
+      <!-- READ Queries (GET) -->
       <tr>
-        <td>GET</td>
-        <td>/movies</td>
-        <td>None</td>
-        <td>None</td>
-        <td>Array of all movie objects, e.g. [{ "Title": "Inception", "Genre": {...}, "Director": {...} }, ...]</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/movies/:title</td>
-        <td>title - movie title</td>
-        <td>None</td>
-        <td>Movie object that matches the title, including description, genre, director, image path, and featured flag</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/movies/genre/:name</td>
-        <td>name - genre name</td>
-        <td>None</td>
-        <td>Array of movies with the specified genre, e.g. [{ "Title": "Se7en", "Genre": {...}, "Director": {...} }, ...]</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/movies/genre/:genreName/director/:directorName</td>
-        <td>genreName - genre, directorName - director name</td>
-        <td>None</td>
-        <td>Array of movies that match both the genre and director</td>
+        <td data-label="Method">GET</td>
+        <td data-label="URL">/users</td>
+        <td data-label="Query Parameters">None</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">
+          Array of user objects:<br>
+          <pre>[
+  {
+    "Username": "John",
+    "Password": "hashedpassword",
+    "Email": "john@example.com",
+    "Birthday": "1990-01-01T00:00:00.000Z",
+    "FavoriteMovies": ["Inception", "Twilight"]
+  },
+  ...
+]</pre>
+        </td>
       </tr>
 
-      <!-- UPDATE Queries -->
       <tr>
-        <td>PUT</td>
-        <td>/movies/:title</td>
-        <td>title - movie title</td>
-        <td>{ "Description": "New description text" }</td>
-        <td>Updates the description of the specified movie</td>
-      </tr>
-      <tr>
-        <td>PUT</td>
-        <td>/movies/director/:name</td>
-        <td>name - director name</td>
-        <td>{ "Bio": "Updated bio text" }</td>
-        <td>Updates the bio for all movies directed by this director</td>
-      </tr>
-      <tr>
-        <td>POST</td>
-        <td>/users/:username/movies/:movieID</td>
-        <td>username - user identifier, movieID - movie title or ObjectId</td>
-        <td>None</td>
-        <td>Adds the specified movie to the user's FavoriteMovies array</td>
+        <td data-label="Method">GET</td>
+        <td data-label="URL">/users/:Username</td>
+        <td data-label="Query Parameters">Username - user's username</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">
+          Single user object:<br>
+          <pre>{
+  "Username": "John",
+  "Password": "hashedpassword",
+  "Email": "john@example.com",
+  "Birthday": "1990-01-01T00:00:00.000Z",
+  "FavoriteMovies": ["Inception", "Twilight"]
+}</pre>
+        </td>
       </tr>
 
-      <!-- DELETE Query -->
       <tr>
-        <td>DELETE</td>
-        <td>/users/:username</td>
-        <td>username - user identifier</td>
-        <td>None</td>
-        <td>Deletes the specified user and returns a confirmation message</td>
+        <td data-label="Method">GET</td>
+        <td data-label="URL">/movies</td>
+        <td data-label="Query Parameters">None</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">
+          Array of all movie objects:<br>
+          <pre>[
+  {
+    "Title": "Inception",
+    "Description": "...",
+    "Genre": { "Name": "Sci-Fi", "Description": "..." },
+    "Director": { "Name": "Christopher Nolan", "Bio": "...", "BirthYear": 1970, "DeathYear": null },
+    "ImagePath": "url"
+  },
+  ...
+]</pre>
+        </td>
       </tr>
+
+      <tr>
+        <td data-label="Method">GET</td>
+        <td data-label="URL">/movies/:Title</td>
+        <td data-label="Query Parameters">Title - movie title</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">Single movie object (same format as above).</td>
+      </tr>
+
+      <tr>
+        <td data-label="Method">GET</td>
+        <td data-label="URL">/movies/genre/:genre</td>
+        <td data-label="Query Parameters">genre - genre name</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">Returns Genre object for first movie found:<br>
+          <pre>{ "Name": "Sci-Fi", "Description": "Science fiction movies" }</pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td data-label="Method">GET</td>
+        <td data-label="URL">/movies/director/:director</td>
+        <td data-label="Query Parameters">director - director name</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">Returns Director object for first movie found:<br>
+          <pre>{
+  "Name": "Christopher Nolan",
+  "Bio": "British-American filmmaker known for...",
+  "BirthYear": 1970,
+  "DeathYear": null
+}</pre>
+        </td>
+      </tr>
+
+      <!-- POST Queries -->
+      <tr>
+        <td data-label="Method">POST</td>
+        <td data-label="URL">/users</td>
+        <td data-label="Query Parameters">None</td>
+        <td data-label="Request Body">
+          JSON object:<br>
+          <pre>{
+  "Username": "John",
+  "Password": "password123",
+  "Email": "john@example.com",
+  "Birthday": "1990-01-01"
+}</pre>
+        </td>
+        <td data-label="Response">Returns created user object.</td>
+      </tr>
+
+      <tr>
+        <td data-label="Method">POST</td>
+        <td data-label="URL">/users/:Username/movies/:MovieID</td>
+        <td data-label="Query Parameters">Username - user's username, MovieID - movie ID or title</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">Returns updated user object with the movie added to FavoriteMovies array.</td>
+      </tr>
+
+      <!-- PUT Queries -->
+      <tr>
+        <td data-label="Method">PUT</td>
+        <td data-label="URL">/users/:Username</td>
+        <td data-label="Query Parameters">Username - user's username</td>
+        <td data-label="Request Body">
+          JSON object (fields to update):<br>
+          <pre>{
+  "Username": "JohnUpdated",
+  "Password": "newpassword123",
+  "Email": "john.updated@example.com",
+  "Birthday": "1990-05-05"
+}</pre>
+        </td>
+        <td data-label="Response">Returns updated user object.</td>
+      </tr>
+
+      <!-- DELETE Queries -->
+      <tr>
+        <td data-label="Method">DELETE</td>
+        <td data-label="URL">/users/:Username/movies/:movieTitle</td>
+        <td data-label="Query Parameters">Username - user's username, movieTitle - title of the movie to remove</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">Returns confirmation message, e.g., "Twilight has been removed from John's favorite movies."</td>
+      </tr>
+
+      <tr>
+        <td data-label="Method">DELETE</td>
+        <td data-label="URL">/users/:Username</td>
+        <td data-label="Query Parameters">Username - user's username</td>
+        <td data-label="Request Body">None</td>
+        <td data-label="Response">Returns confirmation message, e.g., "John was deleted."</td>
+      </tr>
+
     </tbody>
   </table>
 </body>

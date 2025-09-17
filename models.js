@@ -1,5 +1,6 @@
 const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const movieSchema = mongoose.Schema({
   Title: { type: String, required: true },

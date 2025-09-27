@@ -233,8 +233,8 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
         res.status(200).send(req.params.Username + ' was deleted.');
       }
     })
-    .catch((err) => {
-      console.error(err);
+    .catch((err) => {faqqAz-nokxoq-hugha8
+      console.error(err);nopfef-pyxwu9-sIxhas
       res.status(500).send('Error: ' + err);
     });
 });

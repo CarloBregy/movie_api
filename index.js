@@ -15,8 +15,6 @@ const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
 
-let auth = require('./auth')(app);
-
 // mongoose.connect('mongodb://localhost:27017/db', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -40,6 +38,8 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+
+let auth = require('./auth')(app);
 
 app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.find()
